@@ -1,0 +1,21 @@
+spring:
+  security:
+    saml2:
+      relyingparty:
+        registration:
+          auth0:
+            assertingparty:
+              metadata-uri: https://dev-cav5qgi6kd4hmwjx.us.auth0.com/samlp/metadata/m4mEQPJj53pqRSYVNjhCvUmUUnjRw646
+            signing:
+              credentials: &signing-credentials
+                - private-key-location: classpath:local.key
+                  certificate-location: classpath:local.crt
+            singlelogout: &logout-settings
+              binding: POST
+              response-url: "{baseUrl}/logout/saml2/slo"
+          okta:
+            assertingparty:
+              metadata-uri: https://dev-09032945.okta.com/app/exkd0aa3gqiZgDegT5d7/sso/saml/metadata
+            signing:
+              credentials: *signing-credentials
+            singlelogout: *logout-settings
